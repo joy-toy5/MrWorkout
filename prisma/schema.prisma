@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  nickname  String
+  avatarUrl String?
+  createdAt DateTime @default(now())
+
+  favorites Favorite[]
+}
+
+model TutorialCard {
+  id            String @id @default(cuid())
+  muscleGroupId String
+  title         String
+  coverImage    String
+  sourceUrl     String
+  platform      String // "XIAOHONGSHU" | "BILIBILI"
+  contentType   String // "IMAGE_TEXT" | "VIDEO"
+
+  favorites Favorite[]
+
+  @@index([muscleGroupId])
+}
+
+model Favorite {
+  id             String   @id @default(cuid())
+  userId         String
+  tutorialCardId String
+  muscleGroupId  String
+  createdAt      DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tutorialCard TutorialCard @relation(fields: [tutorialCardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tutorialCardId])
+  @@index([userId])
+  @@index([muscleGroupId])
+}
