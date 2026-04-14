@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" fill="none">
+  <!-- 男性正面人体轮廓 -->
+  <g id="body-outline" stroke="#d1d5db" stroke-width="1.5" fill="#f9fafb">
+    <!-- 头部 -->
+    <ellipse cx="200" cy="60" rx="40" ry="48" />
+    <!-- 颈部 -->
+    <rect x="185" y="108" width="30" height="25" rx="5" />
+    <!-- 躯干 -->
+    <path d="M140 133 Q130 180 130 260 Q130 340 150 380 L155 400 H245 L250 380 Q270 340 270 260 Q270 180 260 133 Z" />
+    <!-- 左臂 -->
+    <path d="M140 133 Q110 140 95 180 Q80 230 78 290 Q76 320 80 350 L95 350 Q100 320 100 290 Q100 240 115 195 Q125 165 140 155" />
+    <!-- 右臂 -->
+    <path d="M260 133 Q290 140 305 180 Q320 230 322 290 Q324 320 320 350 L305 350 Q300 320 300 290 Q300 240 285 195 Q275 165 260 155" />
+    <!-- 左手 -->
+    <ellipse cx="87" cy="365" rx="15" ry="22" />
+    <!-- 右手 -->
+    <ellipse cx="313" cy="365" rx="15" ry="22" />
+    <!-- 左腿 -->
+    <path d="M155 400 Q150 450 148 520 Q146 580 148 640 Q150 680 145 740 L150 760 H180 L178 740 Q182 680 182 640 Q182 580 180 520 Q178 450 175 400 Z" />
+    <!-- 右腿 -->
+    <path d="M225 400 Q222 450 220 520 Q218 580 218 640 Q218 680 222 740 L220 760 H250 L255 740 Q250 680 252 640 Q254 580 252 520 Q250 450 245 400 Z" />
+    <!-- 左脚 -->
+    <ellipse cx="165" cy="772" rx="20" ry="12" />
+    <!-- 右脚 -->
+    <ellipse cx="235" cy="772" rx="20" ry="12" />
+  </g>
+
+  <!-- 肌群热区 -->
+  <g id="muscle-regions">
+    <!-- 三角肌前束（左） -->
+    <ellipse data-muscle-id="deltoid-anterior" cx="138" cy="150" rx="18" ry="22" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+    <!-- 三角肌前束（右） -->
+    <ellipse data-muscle-id="deltoid-anterior" cx="262" cy="150" rx="18" ry="22" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+
+    <!-- 三角肌中束（左） -->
+    <ellipse data-muscle-id="deltoid-lateral" cx="125" cy="155" rx="12" ry="18" fill="#86efac" fill-opacity="0.5" stroke="#22c55e" stroke-width="1" class="muscle-zone" />
+    <!-- 三角肌中束（右） -->
+    <ellipse data-muscle-id="deltoid-lateral" cx="275" cy="155" rx="12" ry="18" fill="#86efac" fill-opacity="0.5" stroke="#22c55e" stroke-width="1" class="muscle-zone" />
+
+    <!-- 胸大肌（左） -->
+    <ellipse data-muscle-id="pectoralis-major" cx="170" cy="185" rx="32" ry="25" fill="#fca5a5" fill-opacity="0.5" stroke="#ef4444" stroke-width="1" class="muscle-zone" />
+    <!-- 胸大肌（右） -->
+    <ellipse data-muscle-id="pectoralis-major" cx="230" cy="185" rx="32" ry="25" fill="#fca5a5" fill-opacity="0.5" stroke="#ef4444" stroke-width="1" class="muscle-zone" />
+
+    <!-- 胸小肌（左） -->
+    <ellipse data-muscle-id="pectoralis-minor" cx="165" cy="195" rx="18" ry="14" fill="#fda4af" fill-opacity="0.4" stroke="#f43f5e" stroke-width="1" stroke-dasharray="3 2" class="muscle-zone" />
+    <!-- 胸小肌（右） -->
+    <ellipse data-muscle-id="pectoralis-minor" cx="235" cy="195" rx="18" ry="14" fill="#fda4af" fill-opacity="0.4" stroke="#f43f5e" stroke-width="1" stroke-dasharray="3 2" class="muscle-zone" />
+
+    <!-- 肱二头肌（左） -->
+    <ellipse data-muscle-id="biceps" cx="112" cy="225" rx="14" ry="30" fill="#fdba74" fill-opacity="0.5" stroke="#f97316" stroke-width="1" class="muscle-zone" />
+    <!-- 肱二头肌（右） -->
+    <ellipse data-muscle-id="biceps" cx="288" cy="225" rx="14" ry="30" fill="#fdba74" fill-opacity="0.5" stroke="#f97316" stroke-width="1" class="muscle-zone" />
+
+    <!-- 前臂肌群（左） -->
+    <ellipse data-muscle-id="forearm" cx="98" cy="300" rx="12" ry="35" fill="#d8b4fe" fill-opacity="0.5" stroke="#a855f7" stroke-width="1" class="muscle-zone" />
+    <!-- 前臂肌群（右） -->
+    <ellipse data-muscle-id="forearm" cx="302" cy="300" rx="12" ry="35" fill="#d8b4fe" fill-opacity="0.5" stroke="#a855f7" stroke-width="1" class="muscle-zone" />
+
+    <!-- 腹直肌 -->
+    <rect data-muscle-id="rectus-abdominis" x="178" y="225" width="44" height="90" rx="8" fill="#fde68a" fill-opacity="0.5" stroke="#eab308" stroke-width="1" class="muscle-zone" />
+
+    <!-- 腹外斜肌（左） -->
+    <path data-muscle-id="external-oblique" d="M148 240 Q155 235 175 240 L172 320 Q155 325 145 310 Z" fill="#bef264" fill-opacity="0.5" stroke="#84cc16" stroke-width="1" class="muscle-zone" />
+    <!-- 腹外斜肌（右） -->
+    <path data-muscle-id="external-oblique" d="M252 240 Q245 235 225 240 L228 320 Q245 325 255 310 Z" fill="#bef264" fill-opacity="0.5" stroke="#84cc16" stroke-width="1" class="muscle-zone" />
+
+    <!-- 腹横肌（左） -->
+    <path data-muscle-id="transverse-abdominis" d="M142 270 Q150 265 165 268 L163 310 Q150 315 140 305 Z" fill="#a7f3d0" fill-opacity="0.4" stroke="#10b981" stroke-width="1" stroke-dasharray="3 2" class="muscle-zone" />
+    <!-- 腹横肌（右） -->
+    <path data-muscle-id="transverse-abdominis" d="M258 270 Q250 265 235 268 L237 310 Q250 315 260 305 Z" fill="#a7f3d0" fill-opacity="0.4" stroke="#10b981" stroke-width="1" stroke-dasharray="3 2" class="muscle-zone" />
+
+    <!-- 股四头肌（左） -->
+    <ellipse data-muscle-id="quadriceps" cx="165" cy="480" rx="22" ry="65" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+    <!-- 股四头肌（右） -->
+    <ellipse data-muscle-id="quadriceps" cx="235" cy="480" rx="22" ry="65" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+
+    <!-- 内收肌群（左） -->
+    <ellipse data-muscle-id="adductors" cx="182" cy="475" rx="10" ry="50" fill="#c4b5fd" fill-opacity="0.5" stroke="#8b5cf6" stroke-width="1" class="muscle-zone" />
+    <!-- 内收肌群（右） -->
+    <ellipse data-muscle-id="adductors" cx="218" cy="475" rx="10" ry="50" fill="#c4b5fd" fill-opacity="0.5" stroke="#8b5cf6" stroke-width="1" class="muscle-zone" />
+  </g>
+
+  <!-- 肌群标签 -->
+  <g id="muscle-labels" font-size="9" fill="#374151" text-anchor="middle" font-family="system-ui, sans-serif">
+    <text x="138" y="118">三角肌前束</text>
+    <text x="262" y="118">三角肌前束</text>
+    <text x="108" y="140">中束</text>
+    <text x="292" y="140">中束</text>
+    <text x="170" y="170">胸大肌</text>
+    <text x="230" y="170">胸大肌</text>
+    <text x="165" y="210">胸小肌</text>
+    <text x="235" y="210">胸小肌</text>
+    <text x="95" y="220">肱二头肌</text>
+    <text x="305" y="220">肱二头肌</text>
+    <text x="80" y="295">前臂</text>
+    <text x="320" y="295">前臂</text>
+    <text x="200" y="260">腹直肌</text>
+    <text x="155" y="275">腹外斜肌</text>
+    <text x="245" y="275">腹外斜肌</text>
+    <text x="148" y="295">腹横肌</text>
+    <text x="252" y="295">腹横肌</text>
+    <text x="165" y="430">股四头肌</text>
+    <text x="235" y="430">股四头肌</text>
+    <text x="200" y="450">内收肌群</text>
+  </g>
+</svg>

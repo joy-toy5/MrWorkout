@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" fill="none">
+  <!-- 男性背面人体轮廓 -->
+  <g id="body-outline" stroke="#d1d5db" stroke-width="1.5" fill="#f9fafb">
+    <!-- 头部 -->
+    <ellipse cx="200" cy="60" rx="40" ry="48" />
+    <!-- 颈部 -->
+    <rect x="185" y="108" width="30" height="25" rx="5" />
+    <!-- 躯干 -->
+    <path d="M140 133 Q130 180 130 260 Q130 340 150 380 L155 400 H245 L250 380 Q270 340 270 260 Q270 180 260 133 Z" />
+    <!-- 左臂 -->
+    <path d="M140 133 Q110 140 95 180 Q80 230 78 290 Q76 320 80 350 L95 350 Q100 320 100 290 Q100 240 115 195 Q125 165 140 155" />
+    <!-- 右臂 -->
+    <path d="M260 133 Q290 140 305 180 Q320 230 322 290 Q324 320 320 350 L305 350 Q300 320 300 290 Q300 240 285 195 Q275 165 260 155" />
+    <!-- 左手 -->
+    <ellipse cx="87" cy="365" rx="15" ry="22" />
+    <!-- 右手 -->
+    <ellipse cx="313" cy="365" rx="15" ry="22" />
+    <!-- 左腿 -->
+    <path d="M155 400 Q150 450 148 520 Q146 580 148 640 Q150 680 145 740 L150 760 H180 L178 740 Q182 680 182 640 Q182 580 180 520 Q178 450 175 400 Z" />
+    <!-- 右腿 -->
+    <path d="M225 400 Q222 450 220 520 Q218 580 218 640 Q218 680 222 740 L220 760 H250 L255 740 Q250 680 252 640 Q254 580 252 520 Q250 450 245 400 Z" />
+    <!-- 左脚 -->
+    <ellipse cx="165" cy="772" rx="20" ry="12" />
+    <!-- 右脚 -->
+    <ellipse cx="235" cy="772" rx="20" ry="12" />
+  </g>
+
+  <!-- 肌群热区 -->
+  <g id="muscle-regions">
+    <!-- 斜方肌上束（左） -->
+    <path data-muscle-id="upper-trapezius" d="M170 115 Q185 108 200 112 L198 140 Q185 145 170 140 Z" fill="#fca5a5" fill-opacity="0.5" stroke="#ef4444" stroke-width="1" class="muscle-zone" />
+    <!-- 斜方肌上束（右） -->
+    <path data-muscle-id="upper-trapezius" d="M230 115 Q215 108 200 112 L202 140 Q215 145 230 140 Z" fill="#fca5a5" fill-opacity="0.5" stroke="#ef4444" stroke-width="1" class="muscle-zone" />
+
+    <!-- 三角肌后束（左） -->
+    <ellipse data-muscle-id="deltoid-posterior" cx="138" cy="150" rx="18" ry="22" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+    <!-- 三角肌后束（右） -->
+    <ellipse data-muscle-id="deltoid-posterior" cx="262" cy="150" rx="18" ry="22" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+
+    <!-- 菱形肌 -->
+    <rect data-muscle-id="rhomboid" x="175" y="155" width="50" height="45" rx="8" fill="#fdba74" fill-opacity="0.5" stroke="#f97316" stroke-width="1" class="muscle-zone" />
+
+    <!-- 背阔肌（左） -->
+    <path data-muscle-id="latissimus-dorsi" d="M145 195 Q155 185 175 190 L170 290 Q155 300 140 280 Q135 250 140 220 Z" fill="#86efac" fill-opacity="0.5" stroke="#22c55e" stroke-width="1" class="muscle-zone" />
+    <!-- 背阔肌（右） -->
+    <path data-muscle-id="latissimus-dorsi" d="M255 195 Q245 185 225 190 L230 290 Q245 300 260 280 Q265 250 260 220 Z" fill="#86efac" fill-opacity="0.5" stroke="#22c55e" stroke-width="1" class="muscle-zone" />
+
+    <!-- 竖脊肌 -->
+    <rect data-muscle-id="erector-spinae" x="188" y="200" width="24" height="120" rx="6" fill="#fde68a" fill-opacity="0.5" stroke="#eab308" stroke-width="1" class="muscle-zone" />
+
+    <!-- 肱三头肌（左） -->
+    <ellipse data-muscle-id="triceps" cx="112" cy="225" rx="14" ry="32" fill="#d8b4fe" fill-opacity="0.5" stroke="#a855f7" stroke-width="1" class="muscle-zone" />
+    <!-- 肱三头肌（右） -->
+    <ellipse data-muscle-id="triceps" cx="288" cy="225" rx="14" ry="32" fill="#d8b4fe" fill-opacity="0.5" stroke="#a855f7" stroke-width="1" class="muscle-zone" />
+
+    <!-- 臀大肌（左） -->
+    <ellipse data-muscle-id="gluteus-maximus" cx="175" cy="385" rx="25" ry="22" fill="#fca5a5" fill-opacity="0.5" stroke="#ef4444" stroke-width="1" class="muscle-zone" />
+    <!-- 臀大肌（右） -->
+    <ellipse data-muscle-id="gluteus-maximus" cx="225" cy="385" rx="25" ry="22" fill="#fca5a5" fill-opacity="0.5" stroke="#ef4444" stroke-width="1" class="muscle-zone" />
+
+    <!-- 臀中肌（左） -->
+    <ellipse data-muscle-id="gluteus-medius" cx="165" cy="365" rx="20" ry="14" fill="#fda4af" fill-opacity="0.5" stroke="#f43f5e" stroke-width="1" class="muscle-zone" />
+    <!-- 臀中肌（右） -->
+    <ellipse data-muscle-id="gluteus-medius" cx="235" cy="365" rx="20" ry="14" fill="#fda4af" fill-opacity="0.5" stroke="#f43f5e" stroke-width="1" class="muscle-zone" />
+
+    <!-- 腘绳肌（左） -->
+    <ellipse data-muscle-id="hamstrings" cx="165" cy="490" rx="20" ry="60" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+    <!-- 腘绳肌（右） -->
+    <ellipse data-muscle-id="hamstrings" cx="235" cy="490" rx="20" ry="60" fill="#93c5fd" fill-opacity="0.5" stroke="#3b82f6" stroke-width="1" class="muscle-zone" />
+
+    <!-- 腓肠肌（左） -->
+    <ellipse data-muscle-id="gastrocnemius" cx="163" cy="630" rx="16" ry="40" fill="#fdba74" fill-opacity="0.5" stroke="#f97316" stroke-width="1" class="muscle-zone" />
+    <!-- 腓肠肌（右） -->
+    <ellipse data-muscle-id="gastrocnemius" cx="237" cy="630" rx="16" ry="40" fill="#fdba74" fill-opacity="0.5" stroke="#f97316" stroke-width="1" class="muscle-zone" />
+
+    <!-- 比目鱼肌（左） -->
+    <ellipse data-muscle-id="soleus" cx="163" cy="680" rx="13" ry="30" fill="#bef264" fill-opacity="0.4" stroke="#84cc16" stroke-width="1" stroke-dasharray="3 2" class="muscle-zone" />
+    <!-- 比目鱼肌（右） -->
+    <ellipse data-muscle-id="soleus" cx="237" cy="680" rx="13" ry="30" fill="#bef264" fill-opacity="0.4" stroke="#84cc16" stroke-width="1" stroke-dasharray="3 2" class="muscle-zone" />
+  </g>
+
+  <!-- 肌群标签 -->
+  <g id="muscle-labels" font-size="9" fill="#374151" text-anchor="middle" font-family="system-ui, sans-serif">
+    <text x="200" y="105">斜方肌上束</text>
+    <text x="138" y="130">后束</text>
+    <text x="262" y="130">后束</text>
+    <text x="200" y="172">菱形肌</text>
+    <text x="150" y="235">背阔肌</text>
+    <text x="250" y="235">背阔肌</text>
+    <text x="200" y="255">竖脊肌</text>
+    <text x="95" y="218">肱三头肌</text>
+    <text x="305" y="218">肱三头肌</text>
+    <text x="165" y="355">臀中肌</text>
+    <text x="235" y="355">臀中肌</text>
+    <text x="175" y="390">臀大肌</text>
+    <text x="225" y="390">臀大肌</text>
+    <text x="165" y="440">腘绳肌</text>
+    <text x="235" y="440">腘绳肌</text>
+    <text x="163" y="600">腓肠肌</text>
+    <text x="237" y="600">腓肠肌</text>
+    <text x="163" y="660">比目鱼肌</text>
+    <text x="237" y="660">比目鱼肌</text>
+  </g>
+</svg>
