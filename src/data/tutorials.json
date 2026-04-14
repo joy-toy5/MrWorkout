@@ -1,0 +1,848 @@
+[
+  {
+    "id": "t-upper-trapezius-01",
+    "muscleGroupId": "upper-trapezius",
+    "title": "斜方肌上束训练全攻略｜告别溜肩",
+    "coverImage": "/images/tutorials/upper-trapezius-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example01",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-upper-trapezius-02",
+    "muscleGroupId": "upper-trapezius",
+    "title": "办公族必看！5分钟缓解肩颈酸痛",
+    "coverImage": "/images/tutorials/upper-trapezius-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example01",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-upper-trapezius-03",
+    "muscleGroupId": "upper-trapezius",
+    "title": "耸肩动作详解｜正确发力不伤颈椎",
+    "coverImage": "/images/tutorials/upper-trapezius-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example02",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-upper-trapezius-04",
+    "muscleGroupId": "upper-trapezius",
+    "title": "斜方肌拉伸大全｜改善肩颈线条",
+    "coverImage": "/images/tutorials/upper-trapezius-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example02",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-deltoid-anterior-01",
+    "muscleGroupId": "deltoid-anterior",
+    "title": "三角肌前束训练｜打造饱满肩膀",
+    "coverImage": "/images/tutorials/deltoid-anterior-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example03",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-deltoid-anterior-02",
+    "muscleGroupId": "deltoid-anterior",
+    "title": "前平举正确做法｜避免肩膀受伤",
+    "coverImage": "/images/tutorials/deltoid-anterior-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example03",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-deltoid-anterior-03",
+    "muscleGroupId": "deltoid-anterior",
+    "title": "阿诺德推举教学｜一个动作练全肩",
+    "coverImage": "/images/tutorials/deltoid-anterior-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example04",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-deltoid-anterior-04",
+    "muscleGroupId": "deltoid-anterior",
+    "title": "新手肩部训练计划｜每周2次就够了",
+    "coverImage": "/images/tutorials/deltoid-anterior-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example04",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-deltoid-lateral-01",
+    "muscleGroupId": "deltoid-lateral",
+    "title": "侧平举终极指南｜练出宽肩膀",
+    "coverImage": "/images/tutorials/deltoid-lateral-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example05",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-deltoid-lateral-02",
+    "muscleGroupId": "deltoid-lateral",
+    "title": "三角肌中束孤立训练｜不再借力",
+    "coverImage": "/images/tutorials/deltoid-lateral-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example05",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-deltoid-lateral-03",
+    "muscleGroupId": "deltoid-lateral",
+    "title": "哑铃侧平举常见错误纠正",
+    "coverImage": "/images/tutorials/deltoid-lateral-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example06",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-deltoid-lateral-04",
+    "muscleGroupId": "deltoid-lateral",
+    "title": "绳索侧平举｜持续张力更有效",
+    "coverImage": "/images/tutorials/deltoid-lateral-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example06",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-deltoid-posterior-01",
+    "muscleGroupId": "deltoid-posterior",
+    "title": "后束训练全攻略｜告别圆肩驼背",
+    "coverImage": "/images/tutorials/deltoid-posterior-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example07",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-deltoid-posterior-02",
+    "muscleGroupId": "deltoid-posterior",
+    "title": "面拉正确做法｜改善体态必练",
+    "coverImage": "/images/tutorials/deltoid-posterior-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example07",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-deltoid-posterior-03",
+    "muscleGroupId": "deltoid-posterior",
+    "title": "俯身飞鸟教学｜后束发力感建立",
+    "coverImage": "/images/tutorials/deltoid-posterior-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example08",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-deltoid-posterior-04",
+    "muscleGroupId": "deltoid-posterior",
+    "title": "居家后束训练｜弹力带就够了",
+    "coverImage": "/images/tutorials/deltoid-posterior-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example08",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-pectoralis-major-01",
+    "muscleGroupId": "pectoralis-major",
+    "title": "杠铃卧推完整教学｜胸肌训练之王",
+    "coverImage": "/images/tutorials/pectoralis-major-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example09",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-pectoralis-major-02",
+    "muscleGroupId": "pectoralis-major",
+    "title": "上胸训练秘诀｜填补锁骨下方空缺",
+    "coverImage": "/images/tutorials/pectoralis-major-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example09",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-pectoralis-major-03",
+    "muscleGroupId": "pectoralis-major",
+    "title": "哑铃飞鸟教学｜拉伸胸肌的最佳动作",
+    "coverImage": "/images/tutorials/pectoralis-major-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example10",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-pectoralis-major-04",
+    "muscleGroupId": "pectoralis-major",
+    "title": "女生胸部训练指南｜改善胸型体态",
+    "coverImage": "/images/tutorials/pectoralis-major-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example10",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-pectoralis-major-05",
+    "muscleGroupId": "pectoralis-major",
+    "title": "俯卧撑进阶计划｜从零到一百",
+    "coverImage": "/images/tutorials/pectoralis-major-05.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example11",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-pectoralis-minor-01",
+    "muscleGroupId": "pectoralis-minor",
+    "title": "胸小肌拉伸放松｜改善含胸圆肩",
+    "coverImage": "/images/tutorials/pectoralis-minor-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example12",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-pectoralis-minor-02",
+    "muscleGroupId": "pectoralis-minor",
+    "title": "胸小肌紧缩自测｜你的体态还好吗",
+    "coverImage": "/images/tutorials/pectoralis-minor-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example11",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-pectoralis-minor-03",
+    "muscleGroupId": "pectoralis-minor",
+    "title": "俯卧撑Plus教学｜激活深层胸肌",
+    "coverImage": "/images/tutorials/pectoralis-minor-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example13",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-pectoralis-minor-04",
+    "muscleGroupId": "pectoralis-minor",
+    "title": "泡沫轴胸椎放松｜5分钟改善体态",
+    "coverImage": "/images/tutorials/pectoralis-minor-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example12",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-latissimus-dorsi-01",
+    "muscleGroupId": "latissimus-dorsi",
+    "title": "引体向上从零开始｜背部训练之王",
+    "coverImage": "/images/tutorials/latissimus-dorsi-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example14",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-latissimus-dorsi-02",
+    "muscleGroupId": "latissimus-dorsi",
+    "title": "高位下拉正确姿势｜新手背部入门",
+    "coverImage": "/images/tutorials/latissimus-dorsi-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example13",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-latissimus-dorsi-03",
+    "muscleGroupId": "latissimus-dorsi",
+    "title": "杠铃划船全面教学｜打造V形背",
+    "coverImage": "/images/tutorials/latissimus-dorsi-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example15",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-latissimus-dorsi-04",
+    "muscleGroupId": "latissimus-dorsi",
+    "title": "女生背部训练｜练出好看的背部线条",
+    "coverImage": "/images/tutorials/latissimus-dorsi-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example14",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-latissimus-dorsi-05",
+    "muscleGroupId": "latissimus-dorsi",
+    "title": "单臂哑铃划船｜背阔肌孤立训练",
+    "coverImage": "/images/tutorials/latissimus-dorsi-05.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example16",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-rhomboid-01",
+    "muscleGroupId": "rhomboid",
+    "title": "菱形肌训练｜告别圆肩驼背",
+    "coverImage": "/images/tutorials/rhomboid-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example17",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-rhomboid-02",
+    "muscleGroupId": "rhomboid",
+    "title": "肩胛骨后缩练习｜每天5分钟改善体态",
+    "coverImage": "/images/tutorials/rhomboid-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example15",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-rhomboid-03",
+    "muscleGroupId": "rhomboid",
+    "title": "面拉变体动作｜强化上背部",
+    "coverImage": "/images/tutorials/rhomboid-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example18",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-rhomboid-04",
+    "muscleGroupId": "rhomboid",
+    "title": "靠墙天使练习｜办公室也能做",
+    "coverImage": "/images/tutorials/rhomboid-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example16",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-erector-spinae-01",
+    "muscleGroupId": "erector-spinae",
+    "title": "硬拉入门教学｜安全高效练腰背",
+    "coverImage": "/images/tutorials/erector-spinae-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example19",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-erector-spinae-02",
+    "muscleGroupId": "erector-spinae",
+    "title": "山羊挺身正确做法｜强化下背部",
+    "coverImage": "/images/tutorials/erector-spinae-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example17",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-erector-spinae-03",
+    "muscleGroupId": "erector-spinae",
+    "title": "腰痛康复训练｜循序渐进恢复力量",
+    "coverImage": "/images/tutorials/erector-spinae-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example20",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-erector-spinae-04",
+    "muscleGroupId": "erector-spinae",
+    "title": "超人式和鸟狗式｜居家腰背训练",
+    "coverImage": "/images/tutorials/erector-spinae-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example18",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-biceps-01",
+    "muscleGroupId": "biceps",
+    "title": "肱二头肌训练全攻略｜练出麒麟臂",
+    "coverImage": "/images/tutorials/biceps-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example21",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-biceps-02",
+    "muscleGroupId": "biceps",
+    "title": "弯举常见错误｜你一直在借力",
+    "coverImage": "/images/tutorials/biceps-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example19",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-biceps-03",
+    "muscleGroupId": "biceps",
+    "title": "锤式弯举vs标准弯举｜区别在哪",
+    "coverImage": "/images/tutorials/biceps-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example22",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-biceps-04",
+    "muscleGroupId": "biceps",
+    "title": "女生手臂塑形｜告别松弛拜拜肉",
+    "coverImage": "/images/tutorials/biceps-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example20",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-triceps-01",
+    "muscleGroupId": "triceps",
+    "title": "肱三头肌训练｜手臂围度的关键",
+    "coverImage": "/images/tutorials/triceps-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example23",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-triceps-02",
+    "muscleGroupId": "triceps",
+    "title": "绳索下压教学｜三头肌孤立训练",
+    "coverImage": "/images/tutorials/triceps-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example21",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-triceps-03",
+    "muscleGroupId": "triceps",
+    "title": "椅子臂屈伸｜居家练三头肌",
+    "coverImage": "/images/tutorials/triceps-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example24",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-triceps-04",
+    "muscleGroupId": "triceps",
+    "title": "窄距卧推教学｜胸肌三头一起练",
+    "coverImage": "/images/tutorials/triceps-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example22",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-forearm-01",
+    "muscleGroupId": "forearm",
+    "title": "前臂和握力训练｜提升整体力量",
+    "coverImage": "/images/tutorials/forearm-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example25",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-forearm-02",
+    "muscleGroupId": "forearm",
+    "title": "腕弯举正确做法｜强化前臂肌群",
+    "coverImage": "/images/tutorials/forearm-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example23",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-forearm-03",
+    "muscleGroupId": "forearm",
+    "title": "农夫行走教学｜全身功能性训练",
+    "coverImage": "/images/tutorials/forearm-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example26",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-forearm-04",
+    "muscleGroupId": "forearm",
+    "title": "办公族手腕保健操｜预防腱鞘炎",
+    "coverImage": "/images/tutorials/forearm-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example24",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-rectus-abdominis-01",
+    "muscleGroupId": "rectus-abdominis",
+    "title": "腹肌训练完整计划｜8分钟练出马甲线",
+    "coverImage": "/images/tutorials/rectus-abdominis-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example27",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-rectus-abdominis-02",
+    "muscleGroupId": "rectus-abdominis",
+    "title": "卷腹正确做法｜90%的人都做错了",
+    "coverImage": "/images/tutorials/rectus-abdominis-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example25",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-rectus-abdominis-03",
+    "muscleGroupId": "rectus-abdominis",
+    "title": "悬垂举腿进阶教学｜下腹终极训练",
+    "coverImage": "/images/tutorials/rectus-abdominis-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example28",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-rectus-abdominis-04",
+    "muscleGroupId": "rectus-abdominis",
+    "title": "腹肌显现的秘密｜体脂率才是关键",
+    "coverImage": "/images/tutorials/rectus-abdominis-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example26",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-rectus-abdominis-05",
+    "muscleGroupId": "rectus-abdominis",
+    "title": "平板支撑挑战｜从30秒到5分钟",
+    "coverImage": "/images/tutorials/rectus-abdominis-05.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example29",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-external-oblique-01",
+    "muscleGroupId": "external-oblique",
+    "title": "腹斜肌训练｜塑造人鱼线",
+    "coverImage": "/images/tutorials/external-oblique-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example30",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-external-oblique-02",
+    "muscleGroupId": "external-oblique",
+    "title": "俄罗斯转体教学｜核心旋转力量",
+    "coverImage": "/images/tutorials/external-oblique-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example27",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-external-oblique-03",
+    "muscleGroupId": "external-oblique",
+    "title": "侧平板支撑变体｜腰腹塑形必练",
+    "coverImage": "/images/tutorials/external-oblique-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example31",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-external-oblique-04",
+    "muscleGroupId": "external-oblique",
+    "title": "自行车卷腹正确做法｜高效练腹斜肌",
+    "coverImage": "/images/tutorials/external-oblique-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example28",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-transverse-abdominis-01",
+    "muscleGroupId": "transverse-abdominis",
+    "title": "真空腹练习｜收紧腰围的秘密武器",
+    "coverImage": "/images/tutorials/transverse-abdominis-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example32",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-transverse-abdominis-02",
+    "muscleGroupId": "transverse-abdominis",
+    "title": "深层核心激活｜腹横肌训练入门",
+    "coverImage": "/images/tutorials/transverse-abdominis-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example29",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-transverse-abdominis-03",
+    "muscleGroupId": "transverse-abdominis",
+    "title": "产后腹部恢复｜腹横肌修复训练",
+    "coverImage": "/images/tutorials/transverse-abdominis-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example33",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-transverse-abdominis-04",
+    "muscleGroupId": "transverse-abdominis",
+    "title": "腹式呼吸教学｜随时随地练核心",
+    "coverImage": "/images/tutorials/transverse-abdominis-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example30",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gluteus-maximus-01",
+    "muscleGroupId": "gluteus-maximus",
+    "title": "臀推完整教学｜翘臀训练之王",
+    "coverImage": "/images/tutorials/gluteus-maximus-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example34",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gluteus-maximus-02",
+    "muscleGroupId": "gluteus-maximus",
+    "title": "深蹲练臀秘诀｜不再只练到腿",
+    "coverImage": "/images/tutorials/gluteus-maximus-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example31",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gluteus-maximus-03",
+    "muscleGroupId": "gluteus-maximus",
+    "title": "臀部激活全套动作｜训练前必做",
+    "coverImage": "/images/tutorials/gluteus-maximus-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example35",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gluteus-maximus-04",
+    "muscleGroupId": "gluteus-maximus",
+    "title": "罗马尼亚硬拉｜臀腿训练必备动作",
+    "coverImage": "/images/tutorials/gluteus-maximus-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example32",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gluteus-maximus-05",
+    "muscleGroupId": "gluteus-maximus",
+    "title": "居家臀部训练｜弹力带翘臀计划",
+    "coverImage": "/images/tutorials/gluteus-maximus-05.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example36",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gluteus-maximus-06",
+    "muscleGroupId": "gluteus-maximus",
+    "title": "保加利亚分腿蹲｜单腿臀部训练",
+    "coverImage": "/images/tutorials/gluteus-maximus-06.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example33",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gluteus-medius-01",
+    "muscleGroupId": "gluteus-medius",
+    "title": "臀中肌训练｜改善臀部凹陷",
+    "coverImage": "/images/tutorials/gluteus-medius-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example37",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gluteus-medius-02",
+    "muscleGroupId": "gluteus-medius",
+    "title": "弹力带臀中肌激活｜4个必做动作",
+    "coverImage": "/images/tutorials/gluteus-medius-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example34",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gluteus-medius-03",
+    "muscleGroupId": "gluteus-medius",
+    "title": "蚌式开合教学｜臀中肌入门动作",
+    "coverImage": "/images/tutorials/gluteus-medius-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example38",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gluteus-medius-04",
+    "muscleGroupId": "gluteus-medius",
+    "title": "侧步走训练｜提升骨盆稳定性",
+    "coverImage": "/images/tutorials/gluteus-medius-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example35",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-quadriceps-01",
+    "muscleGroupId": "quadriceps",
+    "title": "深蹲完整教学｜腿部训练之王",
+    "coverImage": "/images/tutorials/quadriceps-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example39",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-quadriceps-02",
+    "muscleGroupId": "quadriceps",
+    "title": "腿举机使用指南｜安全高效练腿",
+    "coverImage": "/images/tutorials/quadriceps-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example36",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-quadriceps-03",
+    "muscleGroupId": "quadriceps",
+    "title": "箭步蹲变体大全｜全方位练腿",
+    "coverImage": "/images/tutorials/quadriceps-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example40",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-quadriceps-04",
+    "muscleGroupId": "quadriceps",
+    "title": "膝盖友好的腿部训练｜保护关节",
+    "coverImage": "/images/tutorials/quadriceps-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example37",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-quadriceps-05",
+    "muscleGroupId": "quadriceps",
+    "title": "高脚杯深蹲｜新手最佳入门动作",
+    "coverImage": "/images/tutorials/quadriceps-05.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example41",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-hamstrings-01",
+    "muscleGroupId": "hamstrings",
+    "title": "腘绳肌训练全攻略｜大腿后侧塑形",
+    "coverImage": "/images/tutorials/hamstrings-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example42",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-hamstrings-02",
+    "muscleGroupId": "hamstrings",
+    "title": "罗马尼亚硬拉vs传统硬拉｜区别详解",
+    "coverImage": "/images/tutorials/hamstrings-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example38",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-hamstrings-03",
+    "muscleGroupId": "hamstrings",
+    "title": "北欧腿弯举教学｜高难度腘绳肌训练",
+    "coverImage": "/images/tutorials/hamstrings-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example43",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-hamstrings-04",
+    "muscleGroupId": "hamstrings",
+    "title": "腘绳肌拉伸大全｜提升柔韧性",
+    "coverImage": "/images/tutorials/hamstrings-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example39",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-adductors-01",
+    "muscleGroupId": "adductors",
+    "title": "内收肌训练｜改善大腿内侧松弛",
+    "coverImage": "/images/tutorials/adductors-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example44",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-adductors-02",
+    "muscleGroupId": "adductors",
+    "title": "相扑深蹲教学｜内收肌和臀部一起练",
+    "coverImage": "/images/tutorials/adductors-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example40",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-adductors-03",
+    "muscleGroupId": "adductors",
+    "title": "哥萨克深蹲｜内收肌灵活性训练",
+    "coverImage": "/images/tutorials/adductors-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example45",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-adductors-04",
+    "muscleGroupId": "adductors",
+    "title": "大腿内侧拉伸｜蝴蝶式和青蛙趴",
+    "coverImage": "/images/tutorials/adductors-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example41",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gastrocnemius-01",
+    "muscleGroupId": "gastrocnemius",
+    "title": "小腿训练全攻略｜打造钻石小腿",
+    "coverImage": "/images/tutorials/gastrocnemius-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example46",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gastrocnemius-02",
+    "muscleGroupId": "gastrocnemius",
+    "title": "站姿提踵正确做法｜小腿塑形",
+    "coverImage": "/images/tutorials/gastrocnemius-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example42",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-gastrocnemius-03",
+    "muscleGroupId": "gastrocnemius",
+    "title": "跳绳训练计划｜小腿和心肺一起练",
+    "coverImage": "/images/tutorials/gastrocnemius-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example47",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-gastrocnemius-04",
+    "muscleGroupId": "gastrocnemius",
+    "title": "小腿拉伸放松｜告别小腿酸胀",
+    "coverImage": "/images/tutorials/gastrocnemius-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example43",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-soleus-01",
+    "muscleGroupId": "soleus",
+    "title": "比目鱼肌训练｜坐姿提踵详解",
+    "coverImage": "/images/tutorials/soleus-01.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example48",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-soleus-02",
+    "muscleGroupId": "soleus",
+    "title": "小腿深层肌肉拉伸｜屈膝拉伸法",
+    "coverImage": "/images/tutorials/soleus-02.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example44",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  },
+  {
+    "id": "t-soleus-03",
+    "muscleGroupId": "soleus",
+    "title": "久坐小腿浮肿解决方案｜促进血液循环",
+    "coverImage": "/images/tutorials/soleus-03.jpg",
+    "sourceUrl": "https://www.bilibili.com/video/BV1example49",
+    "platform": "bilibili",
+    "contentType": "video"
+  },
+  {
+    "id": "t-soleus-04",
+    "muscleGroupId": "soleus",
+    "title": "下犬式变体｜瑜伽中的小腿训练",
+    "coverImage": "/images/tutorials/soleus-04.jpg",
+    "sourceUrl": "https://www.xiaohongshu.com/explore/example45",
+    "platform": "xiaohongshu",
+    "contentType": "image_text"
+  }
+]
