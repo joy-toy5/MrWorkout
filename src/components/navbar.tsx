@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { Dumbbell, Menu, User, LogOut, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,19 +22,14 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-// TODO: 阶段六完成后替换为真实的 session 状态
-const MOCK_LOGGED_IN = false;
-const MOCK_USER = {
-  nickname: "健身达人",
-  email: "user@example.com",
-};
-
 export function Navbar() {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  // TODO: 阶段六完成后替换为真实的 session
-  const isLoggedIn = MOCK_LOGGED_IN;
-  const user = MOCK_USER;
+  const isLoggedIn = status === "authenticated";
+  const userName = session?.user?.name ?? "用户";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -55,7 +52,7 @@ export function Navbar() {
         {/* 桌面端右侧操作区 — md 以上显示 */}
         <div className="hidden md:flex md:items-center md:gap-2">
           {isLoggedIn ? (
-            <DropdownMenu>
+            <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
               <DropdownMenuTrigger
                 render={
                   <button className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-muted outline-none" />
@@ -63,17 +60,18 @@ export function Navbar() {
               >
                 <Avatar size="sm">
                   <AvatarFallback>
-                    {user.nickname.charAt(0)}
+                    {userName.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <span className="max-w-[100px] truncate font-medium">
-                  {user.nickname}
+                  {userName}
                 </span>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" sideOffset={8}>
                 <DropdownMenuItem
                   onClick={() => {
-                    window.location.href = "/profile";
+                    setDropdownOpen(false);
+                    router.push("/profile");
                   }}
                 >
                   <User className="size-4" />
@@ -82,8 +80,8 @@ export function Navbar() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={() => {
-                    // TODO: 阶段六完成后调用 signOut()
-                    console.log("退出登录");
+                    setDropdownOpen(false);
+                    signOut({ redirectTo: "/" });
                   }}
                 >
                   <LogOut className="size-4" />
@@ -146,8 +144,7 @@ export function Navbar() {
                     </Link>
                     <button
                       onClick={() => {
-                        // TODO: 阶段六完成后调用 signOut()
-                        console.log("退出登录");
+                        signOut({ redirectTo: "/" });
                         setSheetOpen(false);
                       }}
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"

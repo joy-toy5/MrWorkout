@@ -10,6 +10,7 @@ type View = "front" | "back";
 
 interface MuscleMapProps {
   onMuscleClick?: (muscleId: string) => void;
+  onGenderChange?: (gender: Gender) => void;
 }
 
 const SVG_MAP: Record<`${Gender}-${View}`, string> = {
@@ -19,7 +20,7 @@ const SVG_MAP: Record<`${Gender}-${View}`, string> = {
   "female-back": "/images/body-maps/female-back.svg",
 };
 
-export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
+export function MuscleMap({ onMuscleClick, onGenderChange }: MuscleMapProps) {
   const [gender, setGender] = useState<Gender>("male");
   const [view, setView] = useState<View>("front");
   const [svgContent, setSvgContent] = useState<string>("");
@@ -66,8 +67,9 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
     if (!container || !svgContent) return;
 
     const zones = container.querySelectorAll<SVGElement>(".muscle-zone");
+    const labels = container.querySelectorAll<SVGElement>(".muscle-label");
 
-    // 记录每个元素的原始 fill-opacity（来自 SVG 属性）
+    // 记录每个热区元素的原始 fill-opacity
     const originalOpacities = new Map<SVGElement, string>();
     zones.forEach((zone) => {
       originalOpacities.set(
@@ -78,12 +80,25 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
       zone.style.transition = "fill-opacity 0.15s, filter 0.15s";
     });
 
-    // 高亮指定 muscleId 的所有元素
+    // 记录每个标签元素的原始 fill
+    const originalLabelFills = new Map<SVGElement, string>();
+    labels.forEach((label) => {
+      originalLabelFills.set(label, label.getAttribute("fill") || "#111827");
+      label.style.cursor = "pointer";
+      label.style.transition = "fill 0.15s";
+    });
+
+    // 高亮指定 muscleId 的所有热区 + 标签
     const highlightMuscle = (muscleId: string) => {
       zones.forEach((zone) => {
         if (zone.getAttribute("data-muscle-id") === muscleId) {
-          zone.setAttribute("fill-opacity", "0.85");
-          zone.style.filter = "brightness(1.2) drop-shadow(0 0 3px rgba(0,0,0,0.2))";
+          zone.setAttribute("fill-opacity", "0.9");
+          zone.style.filter = "brightness(1.3) saturate(1.5) drop-shadow(0 0 6px rgba(0,0,0,0.3))";
+        }
+      });
+      labels.forEach((label) => {
+        if (label.getAttribute("data-muscle-id") === muscleId) {
+          label.setAttribute("fill", "#2563eb");
         }
       });
     };
@@ -94,13 +109,15 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
         zone.setAttribute("fill-opacity", originalOpacities.get(zone) || "0.5");
         zone.style.filter = "none";
       });
+      labels.forEach((label) => {
+        label.setAttribute("fill", originalLabelFills.get(label) || "#111827");
+      });
     };
 
     const handleMouseEnter = (e: Event) => {
       const el = e.currentTarget as SVGElement;
       const muscleId = el.getAttribute("data-muscle-id");
       if (!muscleId) return;
-      // 先全部恢复，再高亮当前 muscleId 的所有元素（左右对称）
       resetAll();
       highlightMuscle(muscleId);
     };
@@ -108,7 +125,6 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
     const handleMouseLeave = (e: Event) => {
       const el = e.currentTarget as SVGElement;
       const related = (e as MouseEvent).relatedTarget as Element | null;
-      // 如果鼠标移入的是同一 muscleId 的另一个元素，不恢复
       if (related) {
         const relatedMuscle = (related as SVGElement).getAttribute?.("data-muscle-id");
         const currentMuscle = el.getAttribute("data-muscle-id");
@@ -125,10 +141,18 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
       }
     };
 
+    // 绑定热区事件
     zones.forEach((zone) => {
       zone.addEventListener("mouseenter", handleMouseEnter);
       zone.addEventListener("mouseleave", handleMouseLeave);
       zone.addEventListener("click", handleClick);
+    });
+
+    // 绑定标签事件（点击 + 悬停联动）
+    labels.forEach((label) => {
+      label.addEventListener("mouseenter", handleMouseEnter);
+      label.addEventListener("mouseleave", handleMouseLeave);
+      label.addEventListener("click", handleClick);
     });
 
     return () => {
@@ -136,6 +160,11 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
         zone.removeEventListener("mouseenter", handleMouseEnter);
         zone.removeEventListener("mouseleave", handleMouseLeave);
         zone.removeEventListener("click", handleClick);
+      });
+      labels.forEach((label) => {
+        label.removeEventListener("mouseenter", handleMouseEnter);
+        label.removeEventListener("mouseleave", handleMouseLeave);
+        label.removeEventListener("click", handleClick);
       });
     };
   }, [svgContent, onMuscleClick]);
@@ -206,7 +235,11 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
       {/* 性别切换 */}
       <Tabs
         defaultValue="male"
-        onValueChange={(val) => setGender(val as Gender)}
+        onValueChange={(val) => {
+          const g = val as Gender;
+          setGender(g);
+          onGenderChange?.(g);
+        }}
       >
         <TabsList className="mx-auto">
           <TabsTrigger value="male">男性</TabsTrigger>
@@ -237,7 +270,7 @@ export function MuscleMap({ onMuscleClick }: MuscleMapProps) {
       </div>
 
       {/* SVG 容器 */}
-      <div className="relative w-full max-w-sm mx-auto overflow-hidden touch-none select-none">
+      <div className="relative w-full max-w-lg mx-auto overflow-hidden touch-none select-none">
         {/* 缩放重置按钮 */}
         {scale > 1 && (
           <button
