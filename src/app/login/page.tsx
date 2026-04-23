@@ -14,11 +14,14 @@ import { loginSchema } from "@/lib/validations";
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const justRegistered = searchParams.get("registered") === "true";
+  const justVerified = searchParams.get("verified") === "true";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const prefilledEmail = searchParams.get("email") || "";
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+  const [verificationEmail, setVerificationEmail] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -48,12 +51,18 @@ function LoginForm() {
       });
 
       if (res?.error) {
+        if (res.code === "email_not_verified") {
+          setVerificationEmail(data.email.trim().toLowerCase());
+          setError("该邮箱尚未完成验证，请先查收验证邮件。");
+          return;
+        }
+
         setError("邮箱或密码错误");
         return;
       }
 
-      // 登录成功，跳转首页
-      router.push("/");
+      // 登录成功，跳转回调页或首页
+      router.push(callbackUrl);
       router.refresh();
     } catch {
       setError("网络错误，请稍后重试");
@@ -71,10 +80,9 @@ function LoginForm() {
         </p>
       </div>
 
-      {/* 注册成功提示 */}
-      {justRegistered && (
+      {justVerified && (
         <div className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-700 dark:bg-green-950/30 dark:text-green-400">
-          注册成功！请使用刚才的邮箱和密码登录。
+          邮箱验证成功，现在可以登录了。
         </div>
       )}
 
@@ -89,6 +97,7 @@ function LoginForm() {
             placeholder="your@email.com"
             autoComplete="email"
             aria-invalid={!!fieldErrors.email}
+            defaultValue={prefilledEmail}
           />
           {fieldErrors.email && (
             <p className="text-xs text-destructive">{fieldErrors.email[0]}</p>
@@ -116,7 +125,15 @@ function LoginForm() {
         {/* 全局错误 */}
         {error && (
           <div className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
-            {error}
+            <p>{error}</p>
+            {verificationEmail && (
+              <Link
+                href={`/verify-email?email=${encodeURIComponent(verificationEmail)}`}
+                className="mt-2 inline-block font-medium underline underline-offset-4"
+              >
+                前往邮箱验证页
+              </Link>
+            )}
           </div>
         )}
 

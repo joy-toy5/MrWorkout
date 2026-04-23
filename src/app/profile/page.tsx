@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {
@@ -22,6 +22,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { PlatformBadge } from "@/components/platform-badge";
+import { useFavorites } from "@/components/favorites-provider";
 import musclesData from "@/data/muscles.json";
 
 interface TutorialCard {
@@ -30,11 +32,11 @@ interface TutorialCard {
   title: string;
   coverImage: string;
   sourceUrl: string;
-  platform: "XIAOHONGSHU" | "BILIBILI";
-  contentType: "IMAGE_TEXT" | "VIDEO";
+  platform: string;
+  contentType: string;
 }
 
-interface FavoriteRecord {
+interface FavoriteWithCard {
   id: string;
   tutorialCardId: string;
   muscleGroupId: string;
@@ -72,50 +74,24 @@ function getMuscleNameZh(muscleGroupId: string): string {
   return muscle?.nameZh ?? muscleGroupId;
 }
 
-/** 平台图标和标签 */
-function PlatformBadge({
-  platform,
-}: {
-  platform: TutorialCard["platform"];
-}) {
-  if (platform === "BILIBILI") {
-    return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-[#00a1d6]/10 px-2 py-0.5 text-xs font-medium text-[#00a1d6]">
-        <Play className="size-3" />
-        B站
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-[#fe2c55]/10 px-2 py-0.5 text-xs font-medium text-[#fe2c55]">
-      <BookOpen className="size-3" />
-      小红书
-    </span>
-  );
-}
-
 export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { removeFavoriteById } = useFavorites();
 
-  const [favorites, setFavorites] = useState<FavoriteRecord[]>([]);
+  const [favorites, setFavorites] = useState<FavoriteWithCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("all");
+  const [fetchError, setFetchError] = useState(false);
 
   // 取消收藏确认弹窗状态
-  const [confirmTarget, setConfirmTarget] = useState<FavoriteRecord | null>(
+  const [confirmTarget, setConfirmTarget] = useState<FavoriteWithCard | null>(
     null
   );
   const [removing, setRemoving] = useState(false);
 
-  // 未登录时重定向到登录页
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  // 获取收藏列表
+  // 注意：路由保护已由 src/proxy.ts 在服务端处理
+  // 获取收藏列表（个人中心需要完整的 tutorialCard 数据，所以仍需独立 fetch）
   useEffect(() => {
     if (status !== "authenticated") return;
 
@@ -124,12 +100,14 @@ export default function ProfilePage() {
     async function fetchFavorites() {
       try {
         const res = await fetch("/api/favorites");
-        if (!res.ok) return;
-        const data: FavoriteRecord[] = await res.json();
-        if (cancelled) return;
-        setFavorites(data);
+        if (!res.ok) {
+          if (!cancelled) setFetchError(true);
+          return;
+        }
+        const data: FavoriteWithCard[] = await res.json();
+        if (!cancelled) setFavorites(data);
       } catch {
-        // 静默失败
+        if (!cancelled) setFetchError(true);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -141,35 +119,44 @@ export default function ProfilePage() {
     };
   }, [status]);
 
+  // 使用 useMemo 缓存筛选结果
+  const filteredFavorites = useMemo(
+    () =>
+      activeTab === "all"
+        ? favorites
+        : favorites.filter(
+            (f) => getMuscleCategory(f.muscleGroupId) === activeTab
+          ),
+    [favorites, activeTab]
+  );
+
+  // 使用 useMemo 一次性计算所有分类计数，避免每个 Tab 重复 filter
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: favorites.length };
+    for (const fav of favorites) {
+      const category = getMuscleCategory(fav.muscleGroupId);
+      counts[category] = (counts[category] ?? 0) + 1;
+    }
+    return counts;
+  }, [favorites]);
+
   // 取消收藏
   const handleRemoveFavorite = useCallback(async () => {
     if (!confirmTarget) return;
 
     setRemoving(true);
-    try {
-      const res = await fetch(`/api/favorites/${confirmTarget.id}`, {
-        method: "DELETE",
-      });
-      if (res.ok) {
-        setFavorites((prev) =>
-          prev.filter((f) => f.id !== confirmTarget.id)
-        );
-      }
-    } catch {
-      // 静默失败
-    } finally {
-      setRemoving(false);
-      setConfirmTarget(null);
+    const ok = await removeFavoriteById(
+      confirmTarget.id,
+      confirmTarget.tutorialCardId
+    );
+    if (ok) {
+      setFavorites((prev) =>
+        prev.filter((f) => f.id !== confirmTarget.id)
+      );
     }
-  }, [confirmTarget]);
-
-  // 按分类筛选收藏
-  const filteredFavorites =
-    activeTab === "all"
-      ? favorites
-      : favorites.filter(
-          (f) => getMuscleCategory(f.muscleGroupId) === activeTab
-        );
+    setRemoving(false);
+    setConfirmTarget(null);
+  }, [confirmTarget, removeFavoriteById]);
 
   // 加载中或未认证时显示加载状态
   if (status === "loading" || status === "unauthenticated") {
@@ -217,6 +204,20 @@ export default function ProfilePage() {
           <div className="flex items-center justify-center py-20">
             <Loader2 className="size-6 animate-spin text-muted-foreground" />
           </div>
+        ) : fetchError ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <p className="text-muted-foreground font-medium">加载失败</p>
+            <p className="text-sm text-muted-foreground/70 mt-1">
+              无法获取收藏列表，请稍后重试
+            </p>
+            <Button
+              variant="outline"
+              className="mt-4"
+              onClick={() => window.location.reload()}
+            >
+              重新加载
+            </Button>
+          </div>
         ) : favorites.length === 0 ? (
           /* 空状态 */
           <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -241,14 +242,7 @@ export default function ProfilePage() {
           >
             <TabsList className="flex-wrap h-auto gap-1">
               {CATEGORY_TABS.map((tab) => {
-                // 计算每个分类下的收藏数量
-                const count =
-                  tab.value === "all"
-                    ? favorites.length
-                    : favorites.filter(
-                        (f) =>
-                          getMuscleCategory(f.muscleGroupId) === tab.value
-                      ).length;
+                const count = categoryCounts[tab.value] ?? 0;
                 // 隐藏没有收藏的分类（"全部"始终显示）
                 if (count === 0 && tab.value !== "all") return null;
                 return (
@@ -305,7 +299,7 @@ function FavoriteCard({
   favorite,
   onRemove,
 }: {
-  favorite: FavoriteRecord;
+  favorite: FavoriteWithCard;
   onRemove: () => void;
 }) {
   const card = favorite.tutorialCard;
@@ -331,7 +325,7 @@ function FavoriteCard({
           />
         ) : (
           <div className="flex items-center justify-center h-full text-muted-foreground/40">
-            {card.contentType === "VIDEO" ? (
+            {card.contentType.toUpperCase() === "VIDEO" ? (
               <Play className="size-10" />
             ) : (
               <BookOpen className="size-10" />

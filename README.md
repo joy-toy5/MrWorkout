@@ -2,16 +2,24 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+1. 初始化环境变量：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+cp .env.example .env
+openssl rand -base64 32
+```
+
+把生成的新值填进 `.env` 的 `AUTH_SECRET`，不要复用示例占位符。
+
+本地开发默认使用 `EMAIL_DELIVERY_MODE=console`，注册后的验证链接会打印在服务端日志里；生产环境必须切换到 `smtp` 并配置 `SMTP_HOST`、`SMTP_PORT`、`SMTP_FROM` 等发信参数。
+
+如果应用前面有一层你信任的反向代理，请设置 `TRUSTED_PROXY_DEPTH` 表示要信任 `x-forwarded-for` 最后几跳；默认值 `1` 只信任最靠近应用的那一跳。
+
+2. 启动开发服务器：
+
+```bash
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

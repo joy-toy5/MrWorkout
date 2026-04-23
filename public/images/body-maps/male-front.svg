@@ -100,7 +100,7 @@
   </g>
 
   <!-- 肌群标签 -->
-  <g id="muscle-labels" font-size="36" fill="#111827" font-weight="600" font-family="system-ui, sans-serif">
+  <g id="muscle-labels" font-size="36" fill="currentColor" font-weight="600" font-family="system-ui, sans-serif">
     <!-- 左侧标签 -->
     <text x="-70" y="302" text-anchor="end" class="muscle-label" data-muscle-id="trapezius">斜方肌</text>
     <text x="-70" y="392" text-anchor="end" class="muscle-label" data-muscle-id="deltoids">三角肌</text>

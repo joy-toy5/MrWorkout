@@ -63,8 +63,11 @@ export default function RegisterPage() {
         return;
       }
 
-      // 注册成功，跳转登录页
-      router.push("/login?registered=true");
+      const body = await res.json();
+      const email = encodeURIComponent(body.email ?? data.email.trim().toLowerCase());
+
+      // 注册成功，跳转邮箱验证页
+      router.push(`/verify-email?email=${email}&sent=true`);
     } catch {
       setError("网络错误，请稍后重试");
     } finally {

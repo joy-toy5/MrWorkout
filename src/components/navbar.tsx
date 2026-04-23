@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Dumbbell, Menu, User, LogOut, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -51,6 +52,7 @@ export function Navbar() {
 
         {/* 桌面端右侧操作区 — md 以上显示 */}
         <div className="hidden md:flex md:items-center md:gap-2">
+          <ThemeToggle />
           {isLoggedIn ? (
             <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
               <DropdownMenuTrigger
@@ -104,7 +106,8 @@ export function Navbar() {
         </div>
 
         {/* 移动端汉堡菜单 — md 以下显示 */}
-        <div className="flex flex-1 items-center justify-end md:hidden">
+        <div className="flex flex-1 items-center justify-end gap-1 md:hidden">
+          <ThemeToggle />
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger
               render={

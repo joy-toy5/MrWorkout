@@ -24,6 +24,14 @@ export const loginSchema = z.object({
   password: z.string().min(1, { error: "请输入密码" }),
 });
 
+export const emailOnlySchema = z.object({
+  email: z.email({ error: "请输入有效的邮箱地址" }),
+});
+
+export const verifyEmailSchema = z.object({
+  token: z.string().min(1, { error: "验证令牌不能为空" }),
+});
+
 /** 添加收藏 API 使用的 schema */
 export const addFavoriteSchema = z.object({
   tutorialCardId: z.string().min(1, { error: "教程卡片 ID 不能为空" }),

@@ -18,10 +18,19 @@ export function HomeContent() {
   const [selectedMuscle, setSelectedMuscle] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [currentGender, setCurrentGender] = useState<Gender>("male");
+  const [interactionResetToken, setInteractionResetToken] = useState(0);
 
   const handleMuscleClick = (muscleId: string) => {
     setSelectedMuscle(muscleId);
     setDialogOpen(true);
+  };
+
+  const handleDialogOpenChange = (open: boolean) => {
+    setDialogOpen(open);
+
+    if (!open) {
+      setInteractionResetToken((token) => token + 1);
+    }
   };
 
   return (
@@ -29,6 +38,7 @@ export function HomeContent() {
       <MuscleMap
         onMuscleClick={handleMuscleClick}
         onGenderChange={setCurrentGender}
+        interactionResetToken={interactionResetToken}
       />
 
       {dialogOpen && (
@@ -36,7 +46,7 @@ export function HomeContent() {
           muscleId={selectedMuscle}
           defaultGender={currentGender}
           open={dialogOpen}
-          onOpenChange={setDialogOpen}
+          onOpenChange={handleDialogOpenChange}
         />
       )}
     </>

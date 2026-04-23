@@ -1,11 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { BookOpen, ChevronLeft, ChevronRight, Heart, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useFavorites } from "@/components/favorites-provider";
+import { PlatformBadge } from "@/components/platform-badge";
 
 interface TutorialData {
   id: string;
@@ -17,131 +19,39 @@ interface TutorialData {
   contentType: "video" | "image_text";
 }
 
-interface FavoriteRecord {
-  id: string;
-  tutorialCardId: string;
-}
-
 interface TutorialCardListProps {
   tutorials: TutorialData[];
 }
 
-/** 平台图标和标签 */
-function PlatformBadge({ platform }: { platform: TutorialData["platform"] }) {
-  if (platform === "bilibili") {
-    return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-[#00a1d6]/10 px-2 py-0.5 text-xs font-medium text-[#00a1d6]">
-        <Play className="size-3" />
-        B站
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-[#fe2c55]/10 px-2 py-0.5 text-xs font-medium text-[#fe2c55]">
-      <BookOpen className="size-3" />
-      小红书
-    </span>
-  );
-}
-
 export function TutorialCardList({ tutorials }: TutorialCardListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
+  const { favoriteMap, pending, addFavorite, removeFavorite } = useFavorites();
 
-  // tutorialCardId → favoriteId 的映射
-  const [favoriteMap, setFavoriteMap] = useState<Map<string, string>>(
-    new Map()
-  );
-  // 正在请求中的 tutorialCardId 集合，防止重复点击
-  const [pending, setPending] = useState<Set<string>>(new Set());
-
-  // 已登录时，获取当前用户的收藏列表
+  // ref 跟踪最新 favoriteMap，避免 toggleFavorite 的 useCallback 依赖它而频繁重建
+  const favoriteMapRef = useRef(favoriteMap);
   useEffect(() => {
-    if (status !== "authenticated") return;
-
-    let cancelled = false;
-
-    async function fetchFavorites() {
-      try {
-        const res = await fetch("/api/favorites");
-        if (!res.ok) return;
-        const data: FavoriteRecord[] = await res.json();
-        if (cancelled) return;
-        const map = new Map<string, string>();
-        for (const fav of data) {
-          map.set(fav.tutorialCardId, fav.id);
-        }
-        setFavoriteMap(map);
-      } catch {
-        // 静默失败
-      }
-    }
-
-    fetchFavorites();
-    return () => {
-      cancelled = true;
-    };
-  }, [status]);
+    favoriteMapRef.current = favoriteMap;
+  }, [favoriteMap]);
 
   const toggleFavorite = useCallback(
     async (tutorial: TutorialData) => {
       // 未登录 → 跳转登录页
-      if (status !== "authenticated" || !session?.user) {
+      if (status !== "authenticated") {
         router.push("/login");
         return;
       }
 
-      // 防止重复点击
-      if (pending.has(tutorial.id)) return;
+      const isFavorited = favoriteMapRef.current.has(tutorial.id);
 
-      setPending((prev) => new Set(prev).add(tutorial.id));
-
-      const existingFavId = favoriteMap.get(tutorial.id);
-
-      try {
-        if (existingFavId) {
-          // 取消收藏
-          const res = await fetch(`/api/favorites/${existingFavId}`, {
-            method: "DELETE",
-          });
-          if (res.ok) {
-            setFavoriteMap((prev) => {
-              const next = new Map(prev);
-              next.delete(tutorial.id);
-              return next;
-            });
-          }
-        } else {
-          // 添加收藏
-          const res = await fetch("/api/favorites", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              tutorialCardId: tutorial.id,
-              muscleGroupId: tutorial.muscleGroupId,
-            }),
-          });
-          if (res.ok) {
-            const fav: FavoriteRecord = await res.json();
-            setFavoriteMap((prev) => {
-              const next = new Map(prev);
-              next.set(tutorial.id, fav.id);
-              return next;
-            });
-          }
-        }
-      } catch {
-        // 静默失败
-      } finally {
-        setPending((prev) => {
-          const next = new Set(prev);
-          next.delete(tutorial.id);
-          return next;
-        });
+      if (isFavorited) {
+        await removeFavorite(tutorial.id);
+      } else {
+        await addFavorite(tutorial.id, tutorial.muscleGroupId);
       }
     },
-    [status, session, router, pending, favoriteMap]
+    [status, router, addFavorite, removeFavorite]
   );
 
   const scroll = (direction: "left" | "right") => {

@@ -11,14 +11,29 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  nickname  String
-  avatarUrl String?
-  createdAt DateTime @default(now())
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String
+  nickname        String
+  avatarUrl       String?
+  emailVerifiedAt DateTime?
+  createdAt       DateTime  @default(now())
 
   favorites Favorite[]
+}
+
+model PendingRegistration {
+  id                         String   @id @default(cuid())
+  email                      String   @unique
+  passwordHash               String
+  nickname                   String
+  verificationTokenHash      String   @unique
+  verificationTokenExpiresAt DateTime
+  lastSentAt                 DateTime @default(now())
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  @@index([verificationTokenExpiresAt])
 }
 
 model TutorialCard {

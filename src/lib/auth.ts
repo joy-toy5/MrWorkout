@@ -1,9 +1,23 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
+import { getAuthSecret } from "./env";
+import { normalizeEmail } from "./email-verification";
+import { rateLimit } from "./rate-limit";
+
+// 登录接口：每个邮箱每 15 分钟最多 10 次尝试
+const LOGIN_LIMIT = 10;
+const LOGIN_WINDOW = 15 * 60 * 1000;
+
+const authSecret = getAuthSecret();
+
+class EmailNotVerifiedError extends CredentialsSignin {
+  code = "email_not_verified";
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  secret: authSecret,
   providers: [
     Credentials({
       credentials: {
@@ -11,16 +25,37 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "密码", type: "password" },
       },
       async authorize(credentials) {
-        const email = credentials?.email as string | undefined;
+        const rawEmail = credentials?.email as string | undefined;
         const password = credentials?.password as string | undefined;
 
-        if (!email || !password) return null;
+        if (!rawEmail || !password) return null;
+
+        const email = normalizeEmail(rawEmail);
+
+        // 按邮箱限制登录尝试次数
+        const { limited } = rateLimit(
+          `login:${email.toLowerCase()}`,
+          LOGIN_LIMIT,
+          LOGIN_WINDOW
+        );
+        if (limited) return null;
 
         const user = await prisma.user.findUnique({
           where: { email },
         });
 
-        if (!user) return null;
+        if (!user) {
+          const pendingRegistration =
+            await prisma.pendingRegistration.findUnique({
+              where: { email },
+            });
+
+          if (pendingRegistration) {
+            throw new EmailNotVerifiedError();
+          }
+
+          return null;
+        }
 
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) return null;
@@ -35,6 +70,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   session: {
     strategy: "jwt",
+    maxAge: 7 * 24 * 60 * 60, // 7 天过期（而非默认 30 天）
   },
   pages: {
     signIn: "/login",

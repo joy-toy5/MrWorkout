@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/navbar";
 import { SessionProvider } from "@/components/session-provider";
+import { FavoritesProvider } from "@/components/favorites-provider";
+import { ErrorBoundary } from "@/components/error-boundary";
+import { Toaster } from "@/components/toaster";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -72,12 +76,20 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <SessionProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-        </SessionProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <SessionProvider>
+            <FavoritesProvider>
+              <Navbar />
+              <main className="flex-1">
+                <ErrorBoundary>{children}</ErrorBoundary>
+              </main>
+              <Toaster />
+            </FavoritesProvider>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
