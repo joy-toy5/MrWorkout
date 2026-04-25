@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "import:bili:candidates": "tsx scripts/import-mediacrawler-bili.ts",
+    "import:xhs:candidates": "tsx scripts/import-mediacrawler-xhs.ts"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

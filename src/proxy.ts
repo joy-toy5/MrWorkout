@@ -6,7 +6,7 @@ import { auth } from "@/lib/auth";
  * 保护需要登录的路由，未认证用户服务端重定向到 /login
  */
 
-const protectedRoutes = ["/profile"];
+const protectedRoutes = ["/profile", "/admin"];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -33,5 +33,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile/:path*"],
+  matcher: ["/profile/:path*", "/admin/:path*"],
 };

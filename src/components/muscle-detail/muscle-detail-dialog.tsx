@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import {
   AlertTriangle,
   Dumbbell,
@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/sheet";
 import { TutorialCardList } from "./tutorial-card-list";
 import musclesData from "@/data/muscles.json";
-import tutorialsData from "@/data/tutorials.json";
 
 type Gender = "male" | "female";
 
@@ -83,21 +82,18 @@ function findMuscle(muscleId: string): MuscleData | undefined {
   return (musclesData as MuscleData[]).find((m) => m.id === muscleId);
 }
 
-/** 查找该肌群关联的教程卡片 */
-function findTutorials(muscleId: string): TutorialData[] {
-  return (tutorialsData as TutorialData[]).filter(
-    (t) => t.muscleGroupId === muscleId
-  );
-}
-
 /** 弹窗内部内容 — 桌面端和移动端共用 */
 function MuscleDetailContent({
   muscle,
   tutorials,
+  tutorialsLoading,
+  tutorialsError,
   defaultGender,
 }: {
   muscle: MuscleData;
   tutorials: TutorialData[];
+  tutorialsLoading: boolean;
+  tutorialsError: string | null;
   defaultGender: Gender;
 }) {
   return (
@@ -166,9 +162,11 @@ function MuscleDetailContent({
       </Tabs>
 
       {/* 相关教程卡片 */}
-      {tutorials.length > 0 && (
-        <TutorialCardList tutorials={tutorials} />
-      )}
+      <TutorialCardList
+        tutorials={tutorials}
+        loading={tutorialsLoading}
+        error={tutorialsError}
+      />
     </div>
   );
 }
@@ -180,16 +178,75 @@ export function MuscleDetailDialog({
   onOpenChange,
 }: MuscleDetailDialogProps) {
   const isDesktop = useIsDesktop();
+  const [tutorials, setTutorials] = useState<TutorialData[]>([]);
+  const [tutorialsLoading, setTutorialsLoading] = useState(false);
+  const [tutorialsError, setTutorialsError] = useState<string | null>(null);
 
   const muscle = useMemo(
     () => (muscleId ? findMuscle(muscleId) : undefined),
     [muscleId]
   );
 
-  const tutorials = useMemo(
-    () => (muscleId ? findTutorials(muscleId) : []),
-    [muscleId]
-  );
+  useEffect(() => {
+    if (!muscleId || !open) {
+      setTutorials([]);
+      setTutorialsLoading(false);
+      setTutorialsError(null);
+      return;
+    }
+
+    const targetMuscleId = muscleId;
+    const controller = new AbortController();
+    let cancelled = false;
+
+    async function fetchTutorials() {
+      setTutorials([]);
+      setTutorialsLoading(true);
+      setTutorialsError(null);
+
+      try {
+        const response = await fetch(
+          `/api/tutorial-cards?muscleGroupId=${encodeURIComponent(targetMuscleId)}&limit=8`,
+          {
+            cache: "no-store",
+            signal: controller.signal,
+          }
+        );
+
+        const body = (await response.json()) as
+          | { error?: string }
+          | TutorialData[];
+
+        if (!response.ok) {
+          if (!cancelled) {
+            setTutorialsError(
+              "error" in body && body.error ? body.error : "加载相关教程失败"
+            );
+          }
+          return;
+        }
+
+        if (!cancelled) {
+          setTutorials(Array.isArray(body) ? body : []);
+        }
+      } catch (error) {
+        if (!cancelled && !(error instanceof DOMException && error.name === "AbortError")) {
+          setTutorialsError("加载相关教程失败，请稍后重试");
+        }
+      } finally {
+        if (!cancelled) {
+          setTutorialsLoading(false);
+        }
+      }
+    }
+
+    fetchTutorials();
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [muscleId, open]);
 
   if (!muscle || !open) return null;
 
@@ -202,7 +259,10 @@ export function MuscleDetailDialog({
     </>
   );
 
-  const description = `${muscle.category} · ${muscle.functions.length} 项主要作用 · ${tutorials.length} 个相关教程`;
+  const tutorialSummary = tutorialsLoading
+    ? "相关教程加载中"
+    : `${tutorials.length} 个相关教程`;
+  const description = `${muscle.category} · ${muscle.functions.length} 项主要作用 · ${tutorialSummary}`;
 
   if (isDesktop) {
     return (
@@ -215,6 +275,8 @@ export function MuscleDetailDialog({
           <MuscleDetailContent
             muscle={muscle}
             tutorials={tutorials}
+            tutorialsLoading={tutorialsLoading}
+            tutorialsError={tutorialsError}
             defaultGender={defaultGender}
           />
         </DialogContent>
@@ -233,6 +295,8 @@ export function MuscleDetailDialog({
           <MuscleDetailContent
             muscle={muscle}
             tutorials={tutorials}
+            tutorialsLoading={tutorialsLoading}
+            tutorialsError={tutorialsError}
             defaultGender={defaultGender}
           />
         </div>

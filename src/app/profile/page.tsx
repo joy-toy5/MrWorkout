@@ -25,6 +25,7 @@ import {
 import { PlatformBadge } from "@/components/platform-badge";
 import { useFavorites } from "@/components/favorites-provider";
 import musclesData from "@/data/muscles.json";
+import { isRemoteAssetUrl, normalizeRemoteAssetUrl } from "@/lib/media-url";
 
 interface TutorialCard {
   id: string;
@@ -304,6 +305,7 @@ function FavoriteCard({
 }) {
   const card = favorite.tutorialCard;
   const muscleName = getMuscleNameZh(favorite.muscleGroupId);
+  const coverImage = normalizeRemoteAssetUrl(card.coverImage);
 
   return (
     <a
@@ -314,9 +316,9 @@ function FavoriteCard({
     >
       {/* 封面图 */}
       <div className="relative aspect-[4/3] bg-muted overflow-hidden">
-        {card.coverImage?.startsWith("http") ? (
+        {isRemoteAssetUrl(coverImage) ? (
           <Image
-            src={card.coverImage}
+            src={coverImage}
             alt={card.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

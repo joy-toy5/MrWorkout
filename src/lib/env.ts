@@ -26,6 +26,19 @@ export function getDatabaseUrl() {
   return process.env.DATABASE_URL?.trim() || "file:prisma/dev.db";
 }
 
+export function getAdminEmails() {
+  const raw = process.env.ADMIN_EMAILS?.trim();
+
+  if (!raw) {
+    return [];
+  }
+
+  return raw
+    .split(/[,\n]/)
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 const emailDeliveryModeSchema = z.enum(["console", "smtp"]);
 
 function getRequiredEnv(name: string) {

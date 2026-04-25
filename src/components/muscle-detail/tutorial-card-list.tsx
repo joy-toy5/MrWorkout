@@ -8,6 +8,7 @@ import { BookOpen, ChevronLeft, ChevronRight, Heart, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/components/favorites-provider";
 import { PlatformBadge } from "@/components/platform-badge";
+import { isRemoteAssetUrl, normalizeRemoteAssetUrl } from "@/lib/media-url";
 
 interface TutorialData {
   id: string;
@@ -21,9 +22,15 @@ interface TutorialData {
 
 interface TutorialCardListProps {
   tutorials: TutorialData[];
+  loading?: boolean;
+  error?: string | null;
 }
 
-export function TutorialCardList({ tutorials }: TutorialCardListProps) {
+export function TutorialCardList({
+  tutorials,
+  loading = false,
+  error = null,
+}: TutorialCardListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { status } = useSession();
   const router = useRouter();
@@ -93,78 +100,92 @@ export function TutorialCardList({ tutorials }: TutorialCardListProps) {
         </div>
       </div>
 
-      {/* 横向滚动容器 */}
-      <div
-        ref={scrollRef}
-        className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent min-w-0"
-      >
-        {tutorials.map((tutorial) => {
-          const isFavorited = favoriteMap.has(tutorial.id);
-          const isPending = pending.has(tutorial.id);
+      {loading ? (
+        <div className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+          正在加载相关教程...
+        </div>
+      ) : error ? (
+        <div className="rounded-lg border border-dashed p-4 text-sm text-destructive">
+          {error}
+        </div>
+      ) : tutorials.length === 0 ? (
+        <div className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+          暂无已发布的相关教程
+        </div>
+      ) : (
+        <div
+          ref={scrollRef}
+          className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent min-w-0"
+        >
+          {tutorials.map((tutorial) => {
+            const isFavorited = favoriteMap.has(tutorial.id);
+            const isPending = pending.has(tutorial.id);
+            const coverImage = normalizeRemoteAssetUrl(tutorial.coverImage);
 
-          return (
-            <a
-              key={tutorial.id}
-              href={tutorial.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex-none w-[220px] snap-start rounded-lg border bg-card overflow-hidden transition-shadow hover:shadow-md"
-            >
-              {/* 封面图 */}
-              <div className="relative aspect-[4/3] bg-muted overflow-hidden">
-                {tutorial.coverImage.startsWith("http") ? (
-                  <Image
-                    src={tutorial.coverImage}
-                    alt={tutorial.title}
-                    fill
-                    sizes="220px"
-                    className="object-cover"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-muted-foreground/40">
-                    {tutorial.contentType === "video" ? (
-                      <Play className="size-10" />
-                    ) : (
-                      <BookOpen className="size-10" />
-                    )}
-                  </div>
-                )}
+            return (
+              <a
+                key={tutorial.id}
+                href={tutorial.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex-none w-[220px] snap-start rounded-lg border bg-card overflow-hidden transition-shadow hover:shadow-md"
+              >
+                {/* 封面图 */}
+                <div className="relative aspect-[4/3] bg-muted overflow-hidden">
+                  {isRemoteAssetUrl(coverImage) ? (
+                    <Image
+                      src={coverImage}
+                      alt={tutorial.title}
+                      fill
+                      sizes="220px"
+                      className="object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-muted-foreground/40">
+                      {tutorial.contentType === "video" ? (
+                        <Play className="size-10" />
+                      ) : (
+                        <BookOpen className="size-10" />
+                      )}
+                    </div>
+                  )}
 
-                {/* 收藏按钮 */}
-                <button
-                  type="button"
-                  disabled={isPending}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleFavorite(tutorial);
-                  }}
-                  className={`absolute top-2 right-2 flex items-center justify-center size-7 rounded-full backdrop-blur transition-colors ${
-                    isFavorited
-                      ? "bg-red-500/90 text-white hover:bg-red-600"
-                      : "bg-background/80 text-muted-foreground hover:text-red-500 hover:bg-background"
-                  } ${isPending ? "opacity-50 cursor-not-allowed" : ""}`}
-                  aria-label={isFavorited ? "取消收藏" : "收藏"}
-                >
-                  <Heart
-                    className="size-3.5"
-                    fill={isFavorited ? "currentColor" : "none"}
-                  />
-                </button>
-              </div>
+                  {/* 收藏按钮 */}
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleFavorite(tutorial);
+                    }}
+                    className={`absolute top-2 right-2 flex items-center justify-center size-7 rounded-full backdrop-blur transition-colors ${
+                      isFavorited
+                        ? "bg-red-500/90 text-white hover:bg-red-600"
+                        : "bg-background/80 text-muted-foreground hover:text-red-500 hover:bg-background"
+                    } ${isPending ? "opacity-50 cursor-not-allowed" : ""}`}
+                    aria-label={isFavorited ? "取消收藏" : "收藏"}
+                  >
+                    <Heart
+                      className="size-3.5"
+                      fill={isFavorited ? "currentColor" : "none"}
+                    />
+                  </button>
+                </div>
 
-              {/* 卡片信息 */}
-              <div className="p-2.5 space-y-1.5">
-                <h4 className="text-xs font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
-                  {tutorial.title}
-                </h4>
-                <PlatformBadge platform={tutorial.platform} />
-              </div>
-            </a>
-          );
-        })}
-      </div>
+                {/* 卡片信息 */}
+                <div className="p-2.5 space-y-1.5">
+                  <h4 className="text-xs font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                    {tutorial.title}
+                  </h4>
+                  <PlatformBadge platform={tutorial.platform} />
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }
