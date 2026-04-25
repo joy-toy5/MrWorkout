@@ -13,7 +13,13 @@ type SearchParams = Promise<{
   q?: string;
 }>;
 
-const STATUS_OPTIONS = ["NEW", "FILTERED", "REJECTED", "PUBLISHED"] as const;
+const STATUS_OPTIONS = [
+  "NEW",
+  "FILTERED",
+  "APPROVED",
+  "REJECTED",
+  "PUBLISHED",
+] as const;
 
 export default async function TutorialCandidatesPage({
   searchParams,

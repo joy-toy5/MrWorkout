@@ -16,6 +16,7 @@ interface TutorialCandidateReviewFormProps {
     sourceUrl: string;
     muscleGroupId: string | null;
     reviewNote: string | null;
+    hasPublishedCard: boolean;
   };
   muscleOptions: Array<{
     id: string;
@@ -38,7 +39,7 @@ export function TutorialCandidateReviewForm({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const submitReview = (action: "publish" | "reject") => {
+  const submitReview = (action: "publish" | "reject" | "unpublish") => {
     if (action === "publish" && !muscleGroupId) {
       setError("发布前必须选择肌群");
       return;
@@ -74,7 +75,15 @@ export function TutorialCandidateReviewForm({
           return;
         }
 
-        setSuccess(action === "publish" ? "已发布为正式教程卡片" : "已拒绝该候选内容");
+        setSuccess(
+          action === "publish"
+            ? candidate.hasPublishedCard
+              ? "已更新正式教程卡片"
+              : "已发布为正式教程卡片"
+            : action === "unpublish"
+              ? "已撤回正式教程卡片"
+              : "已拒绝该候选内容"
+        );
         router.refresh();
       } catch {
         setError("网络错误，请稍后重试");
@@ -165,17 +174,34 @@ export function TutorialCandidateReviewForm({
           disabled={isPending}
         >
           {isPending && <Loader2 className="size-4 animate-spin" />}
-          通过并发布
+          {candidate.hasPublishedCard ? "更新已发布教程" : "通过并发布"}
         </Button>
-        <Button
-          variant="destructive"
-          onClick={() => submitReview("reject")}
-          disabled={isPending}
-        >
-          {isPending && <Loader2 className="size-4 animate-spin" />}
-          拒绝
-        </Button>
+        {candidate.hasPublishedCard ? (
+          <Button
+            variant="destructive"
+            onClick={() => submitReview("unpublish")}
+            disabled={isPending}
+          >
+            {isPending && <Loader2 className="size-4 animate-spin" />}
+            撤回发布
+          </Button>
+        ) : (
+          <Button
+            variant="destructive"
+            onClick={() => submitReview("reject")}
+            disabled={isPending}
+          >
+            {isPending && <Loader2 className="size-4 animate-spin" />}
+            拒绝
+          </Button>
+        )}
       </div>
+
+      {candidate.hasPublishedCard && (
+        <p className="text-xs text-muted-foreground">
+          撤回发布会删除前台可见的正式教程卡片，并级联清理相关收藏记录。
+        </p>
+      )}
     </div>
   );
 }

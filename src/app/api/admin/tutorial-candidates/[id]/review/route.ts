@@ -4,7 +4,7 @@ import { getAdminSession } from "@/lib/admin";
 import { normalizeRemoteAssetUrl } from "@/lib/media-url";
 
 interface ReviewRequestBody {
-  action?: "publish" | "reject";
+  action?: "publish" | "reject" | "unpublish";
   title?: string;
   coverImage?: string;
   creatorName?: string;
@@ -15,6 +15,29 @@ interface ReviewRequestBody {
 function normalizeOptionalString(value: string | undefined) {
   const trimmed = value?.trim();
   return trimmed ? trimmed : null;
+}
+
+async function findExistingPublishedCard(candidate: {
+  publishedCard: { id: string } | null;
+  platform: string;
+  sourceId: string;
+}) {
+  if (candidate.publishedCard) {
+    return candidate.publishedCard;
+  }
+
+  return prisma.tutorialCard.findFirst({
+    where: {
+      platform: candidate.platform,
+      sourceId: candidate.sourceId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+    },
+  });
 }
 
 export async function POST(
@@ -34,7 +57,7 @@ export async function POST(
     const body = (await request.json()) as ReviewRequestBody;
     const action = body.action;
 
-    if (action !== "publish" && action !== "reject") {
+    if (action !== "publish" && action !== "reject" && action !== "unpublish") {
       return NextResponse.json({ error: "无效的审核动作" }, { status: 400 });
     }
 
@@ -62,8 +85,16 @@ export async function POST(
 
     const reviewNote = normalizeOptionalString(body.reviewNote);
     const creatorName = normalizeOptionalString(body.creatorName);
+    const existingPublishedCard = await findExistingPublishedCard(candidate);
 
     if (action === "reject") {
+      if (existingPublishedCard) {
+        return NextResponse.json(
+          { error: "已发布的教程请先撤回发布，再执行拒绝" },
+          { status: 400 }
+        );
+      }
+
       const updated = await prisma.externalTutorialCandidate.update({
         where: { id },
         data: {
@@ -84,6 +115,41 @@ export async function POST(
       });
     }
 
+    if (action === "unpublish") {
+      if (!existingPublishedCard) {
+        return NextResponse.json(
+          { error: "当前候选内容还没有已发布的正式教程卡片" },
+          { status: 400 }
+        );
+      }
+
+      await prisma.$transaction(async (tx) => {
+        await tx.tutorialCard.delete({
+          where: {
+            id: existingPublishedCard.id,
+          },
+        });
+
+        await tx.externalTutorialCandidate.update({
+          where: { id: candidate.id },
+          data: {
+            title,
+            coverImage: coverImage || normalizeRemoteAssetUrl(candidate.coverImage) || null,
+            creatorName,
+            muscleGroupId: body.muscleGroupId || candidate.muscleGroupId || null,
+            reviewNote,
+            ingestStatus: "APPROVED",
+            reviewedAt: new Date(),
+            reviewedByUserId: reviewerId,
+          },
+        });
+      });
+
+      return NextResponse.json({
+        success: true,
+      });
+    }
+
     const publishedCard = await prisma.$transaction(async (tx) => {
       const tutorialData = {
         muscleGroupId: body.muscleGroupId!,
@@ -100,21 +166,9 @@ export async function POST(
         candidateId: candidate.id,
       };
 
-      const existingCard =
-        candidate.publishedCard ||
-        (await tx.tutorialCard.findFirst({
-          where: {
-            platform: candidate.platform,
-            sourceId: candidate.sourceId,
-          },
-          orderBy: {
-            createdAt: "desc",
-          },
-        }));
-
-      const card = existingCard
+      const card = existingPublishedCard
         ? await tx.tutorialCard.update({
-            where: { id: existingCard.id },
+            where: { id: existingPublishedCard.id },
             data: tutorialData,
           })
         : await tx.tutorialCard.create({

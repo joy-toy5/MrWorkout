@@ -6,6 +6,7 @@ import { normalizeRemoteAssetUrl } from "@/lib/media-url";
 import musclesData from "@/data/muscles.json";
 import { PlatformBadge } from "@/components/platform-badge";
 import { TutorialCandidateReviewForm } from "@/components/admin/tutorial-candidate-review-form";
+import { TutorialCoverImage } from "@/components/tutorial-cover-image";
 
 export default async function TutorialCandidateDetailPage({
   params,
@@ -76,11 +77,12 @@ export default async function TutorialCandidateDetailPage({
             <h2 className="mt-4 text-xl font-semibold">{candidate.title}</h2>
 
             {coverImage && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <TutorialCoverImage
                 src={coverImage}
                 alt={candidate.title}
-                className="mt-4 aspect-video w-full rounded-xl border object-cover"
+                contentType={candidate.contentType}
+                loading="eager"
+                className="mt-4 aspect-video w-full rounded-xl border"
               />
             )}
 
@@ -175,6 +177,7 @@ export default async function TutorialCandidateDetailPage({
               sourceUrl: candidate.sourceUrl,
               muscleGroupId: candidate.muscleGroupId,
               reviewNote: candidate.reviewNote,
+              hasPublishedCard: !!candidate.publishedCard,
             }}
             muscleOptions={muscleOptions}
           />

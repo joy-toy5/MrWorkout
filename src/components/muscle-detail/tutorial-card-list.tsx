@@ -3,12 +3,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { BookOpen, ChevronLeft, ChevronRight, Heart, Play } from "lucide-react";
+import { BookOpen, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/components/favorites-provider";
 import { PlatformBadge } from "@/components/platform-badge";
-import { isRemoteAssetUrl, normalizeRemoteAssetUrl } from "@/lib/media-url";
+import { TutorialCoverImage } from "@/components/tutorial-cover-image";
 
 interface TutorialData {
   id: string;
@@ -120,7 +119,6 @@ export function TutorialCardList({
           {tutorials.map((tutorial) => {
             const isFavorited = favoriteMap.has(tutorial.id);
             const isPending = pending.has(tutorial.id);
-            const coverImage = normalizeRemoteAssetUrl(tutorial.coverImage);
 
             return (
               <a
@@ -131,25 +129,13 @@ export function TutorialCardList({
                 className="group flex-none w-[220px] snap-start rounded-lg border bg-card overflow-hidden transition-shadow hover:shadow-md"
               >
                 {/* 封面图 */}
-                <div className="relative aspect-[4/3] bg-muted overflow-hidden">
-                  {isRemoteAssetUrl(coverImage) ? (
-                    <Image
-                      src={coverImage}
-                      alt={tutorial.title}
-                      fill
-                      sizes="220px"
-                      className="object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-muted-foreground/40">
-                      {tutorial.contentType === "video" ? (
-                        <Play className="size-10" />
-                      ) : (
-                        <BookOpen className="size-10" />
-                      )}
-                    </div>
-                  )}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <TutorialCoverImage
+                    src={tutorial.coverImage}
+                    alt={tutorial.title}
+                    contentType={tutorial.contentType}
+                    className="h-full w-full"
+                  />
 
                   {/* 收藏按钮 */}
                   <button

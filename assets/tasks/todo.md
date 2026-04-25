@@ -82,3 +82,15 @@
 - CLI 导入脚本现在只负责文件读取和参数解析，真正的 JSONL 解析、候选去重、批次统计都收敛到共享 helper，避免脚本和后台上传分叉。
 - 后台新增 `POST /api/admin/import-batches`，支持管理员直接上传 MediaCrawler 导出的 `.jsonl` 文件导入候选池。
 - 后台新增 `/admin/import-batches` 页面，包含上传表单、最近批次列表，以及跳转到某一批候选内容的入口。
+
+## Image Host Fix
+
+- [x] 修复 `next/image` 对 `https://wsrv.nl/?url=...` 代理封面的白名单误判
+- [x] 将 `next.config.ts` 的 `images.remotePatterns` 从 `new URL(...)` 改为省略 `search` 的对象写法
+- [x] 追加本次 `remotePatterns + query string` 的排障教训
+
+## Admin Tutorial Cleanup
+
+- [x] 为已发布候选补上“撤回发布”能力，删除正式 `TutorialCard` 并回退候选状态
+- [x] 禁止对仍然挂着正式卡片的候选直接执行“拒绝”，避免后台状态和前台数据不一致
+- [x] 抽出共享教程封面组件，让后台候选详情、首页教程卡片、个人中心收藏卡片统一走同一套渲染逻辑
