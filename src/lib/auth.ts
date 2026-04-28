@@ -2,7 +2,7 @@ import NextAuth, { CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
-import { getAuthSecret } from "./env";
+import { getAdminEmails, getAuthSecret } from "./env";
 import { normalizeEmail } from "./email-verification";
 import { rateLimit } from "./rate-limit";
 
@@ -11,6 +11,21 @@ const LOGIN_LIMIT = 10;
 const LOGIN_WINDOW = 15 * 60 * 1000;
 
 const authSecret = getAuthSecret();
+
+function hasAdminAccess(email?: string | null) {
+  if (!email) {
+    return false;
+  }
+
+  const normalized = email.trim().toLowerCase();
+  const adminEmails = getAdminEmails();
+
+  if (adminEmails.length === 0) {
+    return process.env.NODE_ENV !== "production";
+  }
+
+  return adminEmails.includes(normalized);
+}
 
 class EmailNotVerifiedError extends CredentialsSignin {
   code = "email_not_verified";
@@ -79,12 +94,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.isAdmin = hasAdminAccess(user.email);
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user && token.id) {
-        session.user.id = token.id as string;
+        const sessionUser = session.user as typeof session.user & {
+          id?: string;
+          isAdmin?: boolean;
+        };
+        sessionUser.id = token.id as string;
+        sessionUser.isAdmin = Boolean(token.isAdmin);
       }
       return session;
     },

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Heart, Loader2, Trash2, Mail } from "lucide-react";
+import { Heart, Loader2, Trash2, Mail, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -163,25 +163,40 @@ export default function ProfilePage() {
 
   const userName = session?.user?.name ?? "用户";
   const userEmail = session?.user?.email ?? "";
+  const canAccessAdmin = Boolean(
+    (session?.user as { isAdmin?: boolean } | undefined)?.isAdmin
+  );
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:py-10">
       {/* 用户信息区 */}
-      <div className="flex items-center gap-4 mb-8">
-        <Avatar className="size-16 sm:size-20">
-          <AvatarFallback className="text-xl sm:text-2xl">
-            {userName.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
-        <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight truncate">
-            {userName}
-          </h1>
-          <div className="flex items-center gap-1.5 mt-1 text-sm text-muted-foreground">
-            <Mail className="size-3.5 shrink-0" />
-            <span className="truncate">{userEmail}</span>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-4 min-w-0">
+          <Avatar className="size-16 sm:size-20">
+            <AvatarFallback className="text-xl sm:text-2xl">
+              {userName.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="min-w-0">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight truncate">
+              {userName}
+            </h1>
+            <div className="flex items-center gap-1.5 mt-1 text-sm text-muted-foreground">
+              <Mail className="size-3.5 shrink-0" />
+              <span className="truncate">{userEmail}</span>
+            </div>
           </div>
         </div>
+        {canAccessAdmin ? (
+          <Button
+            variant="outline"
+            className="w-full sm:w-auto"
+            onClick={() => router.push("/admin/tutorial-candidates")}
+          >
+            <ShieldCheck className="size-4" />
+            进入内容审核后台
+          </Button>
+        ) : null}
       </div>
 
       {/* 收藏夹区域 */}

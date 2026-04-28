@@ -118,3 +118,15 @@
 - 已按 upstream 顺序补回女性装饰层：`female-front.svg` 先 `hair` 后 `head`，`female-back.svg` 仅补 `hair`。
 - 所有新增层都放在 `leader-lines` 之前，并保持 `pointer-events="none"`，因此不会干扰现有热区交互。
 - 本轮最小验证已完成：`git diff --check` 通过，diff 只涉及两张女性 SVG 和本任务清单。
+
+## Profile Admin Entry
+
+- [x] 将管理员权限标记写入现有 NextAuth session，避免个人中心额外请求权限接口
+- [x] 在个人中心为有审核权限的账号显示“进入内容审核后台”按钮
+- [x] 运行最小验证并补充本轮 review
+
+## Profile Admin Entry Review
+
+- 个人中心现在直接读取 `session.user.isAdmin` 决定是否显示“进入内容审核后台”按钮，不再额外发权限探测请求。
+- 管理员标记在 NextAuth `jwt` / `session` 回调中生成，规则与现有后台准入一致：优先 `ADMIN_EMAILS`，开发环境无配置时回退为任意已登录用户可访问。
+- 本轮最小验证已完成：`pnpm exec eslint src/lib/auth.ts src/app/profile/page.tsx`、`pnpm exec tsc --noEmit --pretty false`、`git diff --check` 全部通过。
