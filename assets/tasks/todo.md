@@ -71,6 +71,12 @@
 - [x] 统一将远程封面 URL 规范化为 `https`，修复小红书 / B站 `http://` 封面触发的 `next/image` 域名配置报错
 - [x] 将 B站 `hdslb.com` 封面统一转为 `https://wsrv.nl/?url=` 代理格式，修复视频封面防盗链导致的不显示问题
 
+## Body Map Head Restore
+
+- [x] 为当前男性静态 body map 梳理 upstream `head` / `hair` 图层来源和顺序
+- [x] 将 `head` / `hair` 作为非交互层补回 `male-front.svg` 和 `male-back.svg`，并避免遮挡标签
+- [x] 检查修改后的 SVG diff，确认仅触碰静态素材和任务清单
+
 ## Admin Import Workflow
 
 - [x] 抽取共享的 JSONL 导入逻辑，避免 CLI 和后台上传各维护一套规则
@@ -94,3 +100,9 @@
 - [x] 为已发布候选补上“撤回发布”能力，删除正式 `TutorialCard` 并回退候选状态
 - [x] 禁止对仍然挂着正式卡片的候选直接执行“拒绝”，避免后台状态和前台数据不一致
 - [x] 抽出共享教程封面组件，让后台候选详情、首页教程卡片、个人中心收藏卡片统一走同一套渲染逻辑
+
+## Body Map Head Restore Review
+
+- 已确认当前男性头部缺口来自静态 SVG 导出时漏掉 upstream `head` / `hair` 图层，而不是运行时交互逻辑或容器裁切。
+- 已仅为 `male-front.svg` 与 `male-back.svg` 补回非交互 `head-layers`，并放在 `leader-lines` 之前，避免影响热区事件和标签可读性。
+- 本轮最小验证已完成：`git diff --check` 通过，diff 只涉及两张男性 SVG 和本任务清单。
