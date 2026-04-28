@@ -92,10 +92,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async jwt({ token, user }) {
+      const email = user?.email ?? token.email;
+
       if (user) {
         token.id = user.id;
-        token.isAdmin = hasAdminAccess(user.email);
       }
+
+      token.isAdmin = hasAdminAccess(email);
       return token;
     },
     async session({ session, token }) {
@@ -105,7 +108,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           isAdmin?: boolean;
         };
         sessionUser.id = token.id as string;
-        sessionUser.isAdmin = Boolean(token.isAdmin);
+        sessionUser.isAdmin =
+          hasAdminAccess(session.user.email) || Boolean(token.isAdmin);
       }
       return session;
     },

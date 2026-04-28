@@ -130,3 +130,4 @@
 - 个人中心现在直接读取 `session.user.isAdmin` 决定是否显示“进入内容审核后台”按钮，不再额外发权限探测请求。
 - 管理员标记在 NextAuth `jwt` / `session` 回调中生成，规则与现有后台准入一致：优先 `ADMIN_EMAILS`，开发环境无配置时回退为任意已登录用户可访问。
 - 本轮最小验证已完成：`pnpm exec eslint src/lib/auth.ts src/app/profile/page.tsx`、`pnpm exec tsc --noEmit --pretty false`、`git diff --check` 全部通过。
+- 后续修正：管理员标记不能只在新登录时写入 JWT；当前已改为每次基于 `token.email` / `session.user.email` 重算，因此老会话刷新页面后也能显示按钮。
