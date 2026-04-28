@@ -106,3 +106,15 @@
 - 已确认当前男性头部缺口来自静态 SVG 导出时漏掉 upstream `head` / `hair` 图层，而不是运行时交互逻辑或容器裁切。
 - 已仅为 `male-front.svg` 与 `male-back.svg` 补回非交互 `head-layers`，并放在 `leader-lines` 之前，避免影响热区事件和标签可读性。
 - 本轮最小验证已完成：`git diff --check` 通过，diff 只涉及两张男性 SVG 和本任务清单。
+
+## Body Map Head Restore Follow-up
+
+- [x] 确认女性 upstream 图层结构：`female-front` 需要 `hair + head`，`female-back` 只有 `hair`
+- [x] 将女性头部装饰层补回 `female-front.svg` 与 `female-back.svg`，保持非交互且不遮挡标签
+- [x] 检查女性补充后的 diff，并补充本轮 review
+
+## Body Map Head Restore Follow-up Review
+
+- 已按 upstream 顺序补回女性装饰层：`female-front.svg` 先 `hair` 后 `head`，`female-back.svg` 仅补 `hair`。
+- 所有新增层都放在 `leader-lines` 之前，并保持 `pointer-events="none"`，因此不会干扰现有热区交互。
+- 本轮最小验证已完成：`git diff --check` 通过，diff 只涉及两张女性 SVG 和本任务清单。
