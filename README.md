@@ -20,13 +20,18 @@
 
 ## 界面预览
 
-> 【图片占位 1】首页总览：展示肌群图、性别切换、正背面切换和标签交互
+> 首页总览：肌群图、性别切换、正背面切换和标签交互
+<p><img width="2042" height="1011" alt="ba4f295b73315ba782fdad6d856237f" src="https://github.com/user-attachments/assets/362c2cf4-e567-4308-93d2-c03668f8ed47" /></p>
+<p><img width="2043" height="1019" alt="aaba58c93373cc3ac7d7ccedc8c4985" src="https://github.com/user-attachments/assets/913b392f-e6fd-466f-9f01-cc04f4e0c704" /></p>
 
-> 【图片占位 2】肌群详情弹窗：展示肌群介绍、训练建议、教程卡片列表
+> 肌群详情弹窗：肌群介绍、训练建议、教程卡片列表
+<img width="685" height="1129" alt="e55b241fd3083559cf3def1961e790c" src="https://github.com/user-attachments/assets/467ab92c-5f5c-4dc3-969c-3774471a4cb6" />
 
-> 【图片占位 3】个人中心：展示按肌群分类的收藏卡片
+> 个人中心：按肌群分类的收藏卡片
+<img width="2034" height="1014" alt="a0bef299f4a8961ae8e7bb63cae8b80" src="https://github.com/user-attachments/assets/ce5e208d-de49-4bfc-a175-db09a52b72ea" />
 
-> 【图片占位 4】内容审核后台：展示导入批次页和候选内容列表页
+> 内容审核后台：导入批次页和候选内容列表页
+<img width="2024" height="1019" alt="c99b98a056db79ff263664415857343" src="https://github.com/user-attachments/assets/b29bf2cf-09a0-4fa1-a822-f7acc3e358f3" />
 
 ## 当前状态
 
