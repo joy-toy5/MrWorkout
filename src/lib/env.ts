@@ -23,7 +23,7 @@ export function getAuthSecret() {
 }
 
 export function getDatabaseUrl() {
-  return process.env.DATABASE_URL?.trim() || "file:prisma/dev.db";
+  return process.env.DATABASE_URL?.trim() || "file:./dev.db";
 }
 
 export function getAdminEmails() {
